@@ -25,7 +25,7 @@ const Hero = () => {
           
           <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             Full-stack developer specializing in building exceptional digital experiences. 
-            Currently focused on creating accessible, human-centered products.
+            Currently focused on creating AI integrated solutions, accessible, human-centered products.
           </p>
 
           <div className="flex items-center justify-center gap-4 mb-12 animate-slide-up" style={{ animationDelay: '0.3s' }}>

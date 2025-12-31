@@ -2,41 +2,41 @@ import { Briefcase, Calendar } from 'lucide-react';
 
 const experiences = [
   {
-    title: 'Senior Full-Stack Developer',
-    company: 'Tech Innovations Inc.',
-    location: 'San Francisco, CA',
-    period: '2022 - Present',
-    description: 'Leading development of scalable web applications using React, Node.js, and cloud technologies. Mentoring junior developers and implementing best practices.',
+    title: 'Full Stack Development Specialist (MERN)',
+    company: 'AccioJob.',
+    location: 'Noida, India',
+    period: '2024 - Present',
+    description: 'Learned development of scalable web applications using React, Node.js, ExpressJs and MongoDB. This program is rigorous, involving over 1000+ coding problems and complex capstone projects. ',
     achievements: [
-      'Reduced application load time by 40%',
-      'Led team of 5 developers on major product launch',
-      'Implemented CI/CD pipelines improving deployment efficiency',
+      'Executing an 800+ hour technical immersion in the MERN stack (MongoDB, Express, React, Node) and Java enterprise foundations.',
+      'Solved 1000+ Data Structures and Algorithms (DSA) problems focusing on time/space complexity optimization ',
+      'Developing production-grade applications with secure JWT-based authentication and complex REST API architectures.',
     ],
   },
   {
-    title: 'Full-Stack Developer',
-    company: 'Digital Solutions Ltd.',
-    location: 'New York, NY',
-    period: '2020 - 2022',
+    title: 'Product Engineer',
+    company: 'Tekizma India Solutions Private Limited.',
+    location: 'Bengaluru, India',
+    period: 'Apr 2022 - Feb 2023',
     description: 'Developed and maintained multiple client-facing applications. Collaborated with design and product teams to deliver high-quality features.',
     achievements: [
-      'Built RESTful APIs serving 100k+ daily requests',
-      'Migrated legacy codebase to modern React architecture',
-      'Improved test coverage from 30% to 85%',
+      'Architected modular web interfaces using Angular and TypeScript for enterprise healthcare data reconciliation products.',
+      'Engineered 50+ mission-critical features, reducing technical debt and improving system stability by 18% through refactoring.',
+      'Resolved 50+ high-priority production bugs, maintaining 99.9% application availability during critical client audits.',
     ],
   },
-  {
-    title: 'Junior Developer',
-    company: 'StartUp Hub',
-    location: 'Austin, TX',
-    period: '2018 - 2020',
-    description: 'Started career building web applications and learning modern development practices. Worked on various projects from e-commerce to SaaS platforms.',
-    achievements: [
-      'Developed customer dashboard used by 5k+ users',
-      'Contributed to open-source projects',
-      'Received "Rising Star" award in first year',
-    ],
-  },
+  // {
+  //   title: 'Junior Developer',
+  //   company: 'StartUp Hub',
+  //   location: 'Austin, TX',
+  //   period: '2018 - 2020',
+  //   description: 'Started career building web applications and learning modern development practices. Worked on various projects from e-commerce to SaaS platforms.',
+  //   achievements: [
+  //     'Developed customer dashboard used by 5k+ users',
+  //     'Contributed to open-source projects',
+  //     'Received "Rising Star" award in first year',
+  //   ],
+  // },
 ];
 
 export const ExperienceSection = () => {
@@ -48,7 +48,7 @@ export const ExperienceSection = () => {
             Work <span className="text-gradient">Experience</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            My professional journey in software development
+            My professional journey in Web development
           </p>
         </div>
 

@@ -9,32 +9,26 @@ const About = () => {
             <span className="text-primary font-mono text-lg mr-2">01.</span>
             About Me
           </h2>
-          
+
           <div className="w-20 h-1 bg-primary rounded-full mb-8" />
 
           <div className="grid md:grid-cols-5 gap-12 items-start">
             <div className="md:col-span-3 space-y-4 text-muted-foreground">
               <p>
-                Hello! I'm Irfan khan, a passionate software developer based in India. 
-                I enjoy creating things that live on the internet, whether that be websites, 
-                applications, or anything in between.
+                Hello! I'm Irfan khan, a passionate web developer based in India.
+                Results-oriented Full Stack Developer with 2+ years of experience across Java, MERN, and Angular ecosystems, specializing in high-availability web applications.
               </p>
               <p>
-                My interest in web development started back in 2020 when I decided to try 
-                creating custom themes for my blog — turns out hacking together a custom 
-                reblog button taught me a lot about HTML & CSS!
+                Proven track record at Tekizma India Solutions of improving application stability by 15% through rigorous bug resolution and feature engineering.
+                Currently deep-specializing in MERN stack architectures and advanced Data Structures (1000+ problems solved) to build scalable, secure enterprise solutions.
               </p>
-              {/* <p>
-                Fast-forward to today, and I've had the privilege of working at an 
-                advertising agency, a start-up, a student-led design studio, and a huge 
-                corporation. My main focus these days is building accessible, inclusive 
-                products and digital experiences.
+              <p>
+                Currently deep-specializing in MERN stack architectures and advanced Data Structures (1000+ problems solved) to build scalable, secure enterprise solutions.
               </p>
-               */}
               <div className="pt-4">
                 <p className="text-foreground font-medium mb-3">Technologies I work with:</p>
                 <ul className="grid grid-cols-2 gap-2 font-mono text-sm">
-                  {['JavaScript (ES6+)', 'TypeScript', 'React', 'Node.js', 'Angular', 'MySQL'].map((tech) => (
+                  {['JavaScript (ES6+)', 'TailwindCSS', 'React', 'MongoDB', 'Express','Angular', 'Node.js', 'MySQL' ].map((tech) => (
                     <li key={tech} className="flex items-center gap-2">
                       <span className="text-primary">▹</span>
                       {tech}
@@ -50,7 +44,7 @@ const About = () => {
                 <div className="relative bg-muted rounded-lg overflow-hidden border-2 border-primary/50">
                   <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                     {/* <div className="text-6xl">👨‍💻</div> */}
-                   <img src={profileImage} alt="irfankhan"/>
+                    <img src={profileImage} alt="irfankhan" />
                   </div>
                 </div>
               </div>
