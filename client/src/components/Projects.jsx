@@ -8,6 +8,7 @@ const Projects = () => {
       tech: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
       github: 'https://github.com',
       live: 'https://example.com',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
     },
     {
       title: 'Task Management App',
@@ -15,6 +16,7 @@ const Projects = () => {
       tech: ['Next.js', 'TypeScript', 'Prisma', 'Socket.io'],
       github: 'https://github.com',
       live: 'https://example.com',
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
     },
     {
       title: 'AI Content Generator',
@@ -22,16 +24,17 @@ const Projects = () => {
       tech: ['React', 'Python', 'OpenAI', 'AWS'],
       github: 'https://github.com',
       live: 'https://example.com',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
     },
   ];
 
   const otherProjects = [
-    { title: 'Weather Dashboard', description: 'Real-time weather app with forecasting', tech: ['React', 'API'] },
-    { title: 'Portfolio Generator', description: 'CLI tool to generate developer portfolios', tech: ['Node.js', 'CLI'] },
-    { title: 'Chat Application', description: 'Real-time messaging with encryption', tech: ['Socket.io', 'React'] },
-    { title: 'Expense Tracker', description: 'Personal finance management app', tech: ['Vue.js', 'Firebase'] },
-    { title: 'Recipe Finder', description: 'Search and save recipes from around the world', tech: ['React', 'API'] },
-    { title: 'Markdown Editor', description: 'Live preview markdown editor with export', tech: ['TypeScript', 'React'] },
+    { title: 'Weather Dashboard', description: 'Real-time weather app with forecasting', tech: ['React', 'API'], image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop' },
+    { title: 'Tic-Tac-Toe game', description: 'Interactive Tic-Tac-Toe Web Application: Built a responsive, browser-based Tic-Tac-Toe game using React.', tech: ['React', 'Css'], image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop' },
+    { title: 'Chat Application', description: 'Real-time messaging with encryption', tech: ['Socket.io', 'React'], image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&h=300&fit=crop' },
+    { title: 'Expense Tracker', description: 'Personal finance management app', tech: ['Vue.js', 'Firebase'], image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop' },
+    { title: 'Recipe Finder', description: 'Search and save recipes from around the world', tech: ['React', 'API'], image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop' },
+    { title: 'Markdown Editor', description: 'Live preview markdown editor with export', tech: ['TypeScript', 'React'], image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop' },
   ];
 
   return (
@@ -56,10 +59,12 @@ const Projects = () => {
               >
                 <div className={`md:col-span-7 ${index % 2 === 1 ? 'md:col-start-6' : ''}`}>
                   <div className="relative aspect-video bg-muted rounded-lg overflow-hidden group">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                     <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Folder className="w-16 h-16 text-primary/40" />
-                    </div>
                   </div>
                 </div>
 
@@ -97,17 +102,25 @@ const Projects = () => {
             {otherProjects.map((project) => (
               <div
                 key={project.title}
-                className="bg-card p-6 rounded-lg border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-card hover:shadow-card-hover group"
+                className="relative bg-card rounded-lg border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-card hover:shadow-card-hover group overflow-hidden"
+                style={{
+                  backgroundImage: `url(${project.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
               >
-                <Folder className="w-10 h-10 text-primary mb-4" />
-                <h4 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h4>
-                <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-                <div className="flex gap-2 font-mono text-xs text-muted-foreground">
-                  {project.tech.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
+                <div className="absolute inset-0 bg-card/90 group-hover:bg-card/80 transition-colors" />
+                <div className="relative p-6 z-10">
+                  <Folder className="w-10 h-10 text-primary mb-4" />
+                  <h4 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+                  <div className="flex gap-2 font-mono text-xs text-muted-foreground">
+                    {project.tech.map((t) => (
+                      <span key={t}>{t}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

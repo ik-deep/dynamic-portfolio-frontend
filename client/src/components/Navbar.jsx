@@ -6,11 +6,11 @@ import CustomFormModal from './CustomFormModal.jsx';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  
+
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
-    {name: 'Experiences', href: '#experiences'},
+    { name: 'Experiences', href: '#experiences' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -25,7 +25,7 @@ const Navbar = () => {
               Dev
               <span className="text-primary">/&gt;</span>
             </a>
-            
+
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <a
@@ -60,7 +60,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-          
+
           {/* Mobile menu */}
           {isOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-border">
@@ -96,7 +96,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      
+
       <CustomFormModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </>
   );
