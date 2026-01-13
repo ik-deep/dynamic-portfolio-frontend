@@ -1,26 +1,10 @@
+import { useContext } from 'react';
+import { AuthContext } from '../context/Authcontext.jsx';
+import { defaultSkillsData } from '../utils/DefaultPortfolioData.js';
+
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: 'Frontend',
-      skills: ['React', 'JavaScript', 'Angular.js', 'Tailwind CSS', 'Vue.js', 'HTML/CSS', 'Redux Toolkit', 'Bootstrap', 'MUI'],
-    },
-    {
-      title: 'Backend',
-      skills: ['Node.js', 'Express', 'MySQL', 'MongoDB', 'REST APIs','JWT Authentication'],
-    },
-    {
-      title: 'Programing Languages',
-      skills: ['Java (Core)', 'JavaScript (ES6+)', 'TypeScript', 'SQL', 'HTML5', 'CSS3'],
-    },
-    {
-      title: 'Tools & Others',
-      skills: ['Git/GitHub', 'Docker', 'Postman', 'Figma', 'VS Code', 'Agile/Scrum'],
-    },
-    {
-      title: 'Soft Skills',
-      skills: ['Communication', 'Teamwork', 'Problem Solving', 'Adaptability', 'Leadership'],
-    }
-  ];
+  const { portfolioData } = useContext(AuthContext);
+  const skillCategories = portfolioData?.skills || defaultSkillsData;
 
   return (
     <section id="skills" className="py-24 bg-secondary/30">
@@ -34,7 +18,7 @@ const Skills = () => {
           <div className="w-20 h-1 bg-primary rounded-full mb-12" />
 
           <div className="grid md:grid-cols-3 gap-8">
-            {skillCategories.map((category, index) => (
+            {skillCategories?.map((category, index) => (
               <div
                 key={category.title}
                 className="bg-card rounded-xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 border border-border"
@@ -45,14 +29,14 @@ const Skills = () => {
                   {category.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
+                  {category?.skills?.map((skill) => (
                     <span
                       key={skill}
                       className="px-3 py-1.5 bg-secondary text-secondary-foreground text-sm rounded-lg font-mono hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
                     >
                       {skill}
                     </span>
-                  ))}
+                  )) || null}
                 </div>
               </div>
             ))}

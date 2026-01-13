@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Menu, X } from 'lucide-react';
+import { AuthContext } from '../context/Authcontext.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 import CustomFormModal from './CustomFormModal.jsx';
+import LoginModal from './auth/LoginModal.jsx';
+import RegisterModal from './auth/RegisterModal.jsx';
 
-const Navbar = () => {
+const Navbar = ({ initialData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
@@ -40,18 +46,34 @@ const Navbar = () => {
 
             <div className="flex items-center gap-4">
               <ThemeToggle />
+              {isLoggedIn ? (
+                <button
+                  onClick={logout}
+                  className="hidden sm:inline-flex px-4 py-2 bg-red-600 text-white rounded-lg font-medium text-sm hover:bg-red-700 transition-colors"
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsLoginOpen(true)}
+                  className="hidden sm:inline-flex px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:opacity-90 transition-opacity"
+                >
+                  Login
+                </button>
+              )}
               <a
                 href="#contact"
                 className="hidden sm:inline-flex px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:opacity-90 transition-opacity"
               >
                 Hire Me
               </a>
+               {isLoggedIn && (
               <button
                 onClick={() => setIsFormOpen(true)}
                 className="hidden sm:inline-flex px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:opacity-90 transition-opacity"
               >
                 Custom Form
-              </button>
+              </button>)}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden p-2 text-muted-foreground hover:text-primary transition-colors"
@@ -66,15 +88,36 @@ const Navbar = () => {
             <div className="md:hidden mt-4 pb-4 border-t border-border">
               <div className="flex flex-col gap-4 pt-4">
                 {navLinks.map((link) => (
+                  <div >
+
                   <a
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                    className="text-muted-foreground hover:text-primary-900 duration-300  transition-colors text-sm font-medium"
                   >
                     {link.name}
                   </a>
+                  </div>
                 ))}
+                {isLoggedIn ? (
+                  <button
+                    onClick={logout}
+                   className="inline-flex px-4 py-2 bg-red-600 text-white rounded-lg font-medium text-sm hover:bg-red-700 transition-opacity w-fit"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setIsLoginOpen(true);
+                      setIsOpen(false);
+                    }}
+                    className="inline-flex px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:opacity-90 transition-opacity w-fit"
+                  >
+                    Login
+                  </button>
+                )}
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
@@ -82,6 +125,7 @@ const Navbar = () => {
                 >
                   Hire Me
                 </a>
+                  {isLoggedIn && (
                 <button
                   onClick={() => {
                     setIsFormOpen(true);
@@ -90,14 +134,30 @@ const Navbar = () => {
                   className="inline-flex px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:opacity-90 transition-opacity w-fit"
                 >
                   Custom Form
-                </button>
+                </button>)}
               </div>
             </div>
           )}
         </div>
       </nav>
 
-      <CustomFormModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      <CustomFormModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} initialData={initialData}/>
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onSwitchToRegister={() => {
+          setIsLoginOpen(false);
+          setIsRegisterOpen(true);
+        }}
+      />
+      <RegisterModal
+        isOpen={isRegisterOpen}
+        onClose={() => setIsRegisterOpen(false)}
+        onSwitchToLogin={() => {
+          setIsRegisterOpen(false);
+          setIsLoginOpen(true);
+        }}
+      />
     </>
   );
 };

@@ -1,80 +1,60 @@
 import  mongoose from 'mongoose';
 
-// Define the structure for repeatable items
-const skillSchema = new mongoose.Schema({
-    frontend: [{
-        name: String,
-        level: String
-    }],
-    backend: [{
-        name: String,
-        level: String
-    }],
-    programmingLanguages: [{
-        name: String,
-        level: String
-    }],
-    tools: [{
-        tname: String,
-        level: String
-    }],
-    softSkills: [{
-        name: String,
-        level: String
-    }]
+// Define the structure for skills categories
+const skillCategorySchema = new mongoose.Schema({
+    title: String,
+    skills: [String]
 }, { _id: false });
 
+// Define the structure for experience
+const experienceSchema = new mongoose.Schema({
+    title: String,
+    company: String,
+    location: String,
+    period: String,
+    description: String,
+    achievements: [String]
+}, { _id: false });
+
+// Define the structure for projects
 const projectSchema = new mongoose.Schema({
     title: String,
     description: String,
-    techUsed: [{ type: String }],
-    links: { liveLink: String, githubLink: String }
+    tech: [String],
+    github: String,
+    live: String,
+    image: String
 }, { _id: false });
 
 const PortfolioSchema = new mongoose.Schema({
     // CRITICAL: Link to User or Default ID
     userId: {
-        type: String, // Use String to accommodate ObjectId and the "DEFAULT_PORTFOLIO_ID" string
+        type: String,
         required: true,
         unique: true,
     },
     // --- Core Content Fields ---
-    name: { type: String, default: 'Default Portfolio Name' },
-    address: { type: String, default: 'Default Address' },
-    title: { type: String, default: 'Full-Stack Developer' },
-    sortSummary: {
-        type: String, trim: true,
-        maxlength: 1000
+    name: { type: String, default: 'New User' },
+    email: { type: String, default: '' },
+    github: { type: String, default: 'https://github.com' },
+    linkedin: { type: String, default: 'https://linkedin.com' },
+    address: { type: String, default: 'Your Location' },
+    title: { type: String, default: 'Full Stack Developer' },
+    summary: { type: String, default: 'Welcome to your portfolio!' },
+    technologiesWorkWith:{type: [String],default:''},
+    description: { type: String, default: 'I\'m a passionate developer...' },
+
+    // --- Skills as array of categories ---
+    skills: [skillCategorySchema],
+
+    // --- Experience array ---
+    experience: [experienceSchema],
+
+    // --- Projects with featured and other ---
+    projects: {
+        featured: [projectSchema],
+        other: [projectSchema]
     },
-    longSummary: {
-        type: String, trim: true,
-        maxlength: 1000
-    },
-
-    // --- Array Fields for repeating items ---
-    workedOnSkills: [
-        {
-            name: String,
-            level: String
-        }
-    ],
-
-    experience: [
-        {
-            company: String,
-            position: String,
-            startDate: String,
-            endDate: String,
-            address: String,
-            description: String
-        }
-    ],
-    skills: [skillSchema],
-    projects: [projectSchema],
-
-    contactEmail: String,
-    githubUrl: String,
-    linkedinUrl: String,
 
     lastUpdated: {
         type: Date,

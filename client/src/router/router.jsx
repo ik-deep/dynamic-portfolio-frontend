@@ -3,6 +3,7 @@ import Index from "../pages/Index.jsx";
 import NotFound from "../pages/NotFound.jsx";
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",

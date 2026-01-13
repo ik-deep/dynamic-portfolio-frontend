@@ -1,41 +1,13 @@
 import { ExternalLink, Github, Folder } from 'lucide-react';
+import { useContext } from 'react';
+import { AuthContext } from '../context/Authcontext.jsx';
+import { defaultProjectsData } from '../utils/DefaultPortfolioData.js';
 
 const Projects = () => {
-  const featuredProjects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard. Built with modern technologies for scalability.',
-      tech: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-    },
-    {
-      title: 'Task Management App',
-      description: 'Collaborative project management tool with real-time updates, drag-and-drop functionality, and team collaboration features.',
-      tech: ['Next.js', 'TypeScript', 'Prisma', 'Socket.io'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
-    },
-    {
-      title: 'AI Content Generator',
-      description: 'SaaS platform leveraging AI to generate marketing content, blog posts, and social media copy with customizable templates.',
-      tech: ['React', 'Python', 'OpenAI', 'AWS'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-    },
-  ];
-
-  const otherProjects = [
-    { title: 'Weather Dashboard', description: 'Real-time weather app with forecasting', tech: ['React', 'API'], image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop' },
-    { title: 'Tic-Tac-Toe game', description: 'Interactive Tic-Tac-Toe Web Application: Built a responsive, browser-based Tic-Tac-Toe game using React.', tech: ['React', 'Css'], image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop' },
-    { title: 'Chat Application', description: 'Real-time messaging with encryption', tech: ['Socket.io', 'React'], image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&h=300&fit=crop' },
-    { title: 'Expense Tracker', description: 'Personal finance management app', tech: ['Vue.js', 'Firebase'], image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop' },
-    { title: 'Recipe Finder', description: 'Search and save recipes from around the world', tech: ['React', 'API'], image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop' },
-    { title: 'Markdown Editor', description: 'Live preview markdown editor with export', tech: ['TypeScript', 'React'], image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop' },
-  ];
+  const { portfolioData } = useContext(AuthContext);
+  const projectsData = portfolioData?.projects || defaultProjectsData;
+  const featuredProjects = projectsData.featured || defaultProjectsData.featured;
+  const otherProjects = projectsData.other || defaultProjectsData.other;
 
   return (
     <section id="projects" className="py-24 bg-background">
@@ -67,7 +39,6 @@ const Projects = () => {
                     <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors" />
                   </div>
                 </div>
-
                 <div
                   className={`md:col-span-6 md:absolute ${
                     index % 2 === 1 ? 'md:left-0' : 'md:right-0'

@@ -1,45 +1,11 @@
 import { Briefcase, Calendar } from 'lucide-react';
-
-const experiences = [
-  {
-    title: 'Full Stack Development Specialist (MERN)',
-    company: 'AccioJob.',
-    location: 'Noida, India',
-    period: '2024 - Present',
-    description: 'Learned development of scalable web applications using React, Node.js, ExpressJs and MongoDB. This program is rigorous, involving over 1000+ coding problems and complex capstone projects. ',
-    achievements: [
-      'Executing an 800+ hour technical immersion in the MERN stack (MongoDB, Express, React, Node) and Java enterprise foundations.',
-      'Solved 1000+ Data Structures and Algorithms (DSA) problems focusing on time/space complexity optimization ',
-      'Developing production-grade applications with secure JWT-based authentication and complex REST API architectures.',
-    ],
-  },
-  {
-    title: 'Product Engineer',
-    company: 'Tekizma India Solutions Private Limited.',
-    location: 'Bengaluru, India',
-    period: 'Apr 2022 - Feb 2023',
-    description: 'Developed and maintained multiple client-facing applications. Collaborated with design and product teams to deliver high-quality features.',
-    achievements: [
-      'Architected modular web interfaces using Angular and TypeScript for enterprise healthcare data reconciliation products.',
-      'Engineered 50+ mission-critical features, reducing technical debt and improving system stability by 18% through refactoring.',
-      'Resolved 50+ high-priority production bugs, maintaining 99.9% application availability during critical client audits.',
-    ],
-  },
-  // {
-  //   title: 'Junior Developer',
-  //   company: 'StartUp Hub',
-  //   location: 'Austin, TX',
-  //   period: '2018 - 2020',
-  //   description: 'Started career building web applications and learning modern development practices. Worked on various projects from e-commerce to SaaS platforms.',
-  //   achievements: [
-  //     'Developed customer dashboard used by 5k+ users',
-  //     'Contributed to open-source projects',
-  //     'Received "Rising Star" award in first year',
-  //   ],
-  // },
-];
+import { useContext } from 'react';
+import { AuthContext } from '../context/Authcontext.jsx';
+import { defaultExperienceData } from '../utils/DefaultPortfolioData.js';
 
 const Experience = () => {
+  const { portfolioData } = useContext(AuthContext);
+  const experiences = portfolioData?.experience || defaultExperienceData;
   return (
     <section id="experiences" className="py-20 bg-muted/30">
       <div className="container mx-auto px-6">
@@ -90,12 +56,12 @@ const Experience = () => {
                     </p>
                     
                     <ul className="space-y-2">
-                      {exp.achievements.map((achievement, i) => (
+                      {exp.achievements?.map((achievement, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm">
                           <span className="text-primary mt-1">▹</span>
                           <span className="text-foreground/80">{achievement}</span>
                         </li>
-                      ))}
+                      )) || null}
                     </ul>
                   </div>
                 </div>

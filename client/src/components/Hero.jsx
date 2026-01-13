@@ -1,6 +1,12 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { useContext } from 'react';
+import { AuthContext } from '../context/Authcontext.jsx';
+import { defaultHeroData } from '../utils/DefaultPortfolioData.js';
 
 const Hero = () => {
+  const { portfolioData } = useContext(AuthContext);
+  const data = portfolioData || defaultHeroData;
+
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 bg-gradient-hero relative overflow-hidden">
       {/* Background decoration */}
@@ -16,16 +22,15 @@ const Hero = () => {
           </p>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 animate-slide-up">
-            Irfan Khan
+            {data.name}
           </h1>
           
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-muted-foreground mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            I build things for the <span className="text-gradient">web</span>
+            {data.title}
           </h2>
           
           <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            Full-stack developer specializing in building exceptional digital experiences. 
-            Currently focused on creating AI integrated solutions, accessible, human-centered products.
+            {data.description}
           </p>
 
           <div className="flex items-center justify-center gap-4 mb-12 animate-slide-up" style={{ animationDelay: '0.3s' }}>
@@ -44,13 +49,13 @@ const Hero = () => {
           </div>
 
           <div className="flex items-center justify-center gap-6 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <a href="https://github.com/ik-deep/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href={data.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <Github className="w-6 h-6" />
             </a>
-            <a href="https://linkedin.com/irfan-khan173/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href={data.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <Linkedin className="w-6 h-6" />
             </a>
-            <a href="mailto:er.irfan2798@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href={`mailto:${data.email}`} className="text-muted-foreground hover:text-primary transition-colors">
               <Mail className="w-6 h-6" />
             </a>
           </div>

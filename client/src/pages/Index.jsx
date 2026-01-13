@@ -5,18 +5,21 @@ import Skills from '../components/Skills.jsx';
 import Projects from '../components/Projects.jsx';
 import Contact from '../components/Contact.jsx';
 import Footer from '../components/Footer.jsx';
-import  Experiences from '../components/Experience.jsx';
+import Experiences from '../components/Experience.jsx';
+
 
 
 const Index = () => {
+
+
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar/>
       <main>
         <Hero />
-        <About />
+        <About/>
         <Skills />
-        <Experiences /> 
+        <Experiences />
         <Projects />
         <Contact />
       </main>

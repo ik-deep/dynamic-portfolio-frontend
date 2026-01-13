@@ -1,8 +1,78 @@
 // /server/controllers/auth.controller.js
 
 import User from '../models/User.js';
+import Portfolio from '../models/Portfolio.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+
+// Default portfolio data for new users
+const defaultPortfolioData = {
+    name: "New User",
+    email: "",
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+    address: "Your Location",
+    title: "Full Stack Developer",
+    summary: "Welcome to your portfolio! Edit this content using the Custom Form to personalize your portfolio.",
+    description: "I'm a passionate developer focused on creating amazing web experiences. Update this section to tell your story and showcase your skills.",
+    technologiesWorkWith: ['JavaScript (ES6+)', 'TailwindCSS', 'React', 'MongoDB', 'Express', 'Angular', 'Node.js', 'MySQL'],
+    skills: [
+        {
+        title: 'Frontend',
+        skills: ['React', 'JavaScript', 'Angular.js', 'Tailwind CSS', 'HTML/CSS', 'Redux Toolkit', 'Bootstrap', 'MUI']
+    },
+    {
+        title: 'Backend',
+        skills: ['Node.js', 'Express', 'MySQL', 'MongoDB', 'REST APIs', 'JWT Authentication']
+    },
+    {
+        title: 'Programming Languages',
+        skills: ['Java (Core)', 'JavaScript (ES6+)', 'TypeScript', 'SQL', 'HTML5', 'CSS3']
+    },
+    {
+        title: 'Tools & Others',
+        skills: ['Git/GitHub', 'Docker', 'Postman', 'Figma', 'VS Code', 'Agile/Scrum']
+    },
+    {
+        title: 'Soft Skills',
+        skills: ['Communication', 'Teamwork', 'Problem Solving', 'Adaptability', 'Leadership']
+    }
+],
+    experience: [
+        {
+            title: 'Your Job Title',
+            company: 'Company Name',
+            location: 'Location',
+            period: 'Start - End Date',
+            description: 'Add your work experience here. Describe your role and responsibilities.',
+            achievements: [
+                'Add your key achievements',
+                'Highlight your impact',
+                'Showcase your skills'
+            ]
+        }
+    ],
+    projects: {
+        featured: [
+            {
+                title: 'Your Featured Project',
+                description: 'Describe your amazing project here. What technologies did you use? What problems did it solve?',
+                tech: ['React', 'Node.js', 'MongoDB'],
+                github: 'https://github.com',
+                live: 'https://example.com',
+                image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop'
+            }
+        ],
+        other: [
+            {
+                title: 'Side Project',
+                description: 'Another project you worked on',
+                tech: ['JavaScript', 'CSS'],
+                image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop'
+            }
+        ]
+    }
+};
 
 // Helper to generate JWT
 const generateToken = (id) => {
@@ -29,6 +99,15 @@ const register = async (req, res) => {
             password: hashedPassword,
         });
 
+        // Create default portfolio for new user
+        const portfolioData = {
+            ...defaultPortfolioData,
+            userId: user._id,
+            email: email
+        };
+        
+       const portfolio =   await Portfolio.create(portfolioData);
+    
         // Generate token and send back
         res.status(201).json({
             message: 'User registered successfully',

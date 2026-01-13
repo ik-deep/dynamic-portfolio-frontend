@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import clc from "cli-color";
-import  insertDefaultPortfolio  from './utils/seedDefaultData.js';
 
 // Load environment variables
 dotenv.config();
@@ -12,14 +11,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to Database and Seed Default Data
-connectDB().then(() => {
-    // Crucial step: Ensure the default data is available
-    insertDefaultPortfolio(); 
-});
+// Connect to Database
+connectDB();
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:3000' })); // Adjust origin as needed
+app.use(cors({ origin: 'http://localhost:5173' })); // Adjust origin as needed
 app.use(express.json()); // Body parser for JSON
 app.use(express.urlencoded({ extended: true }));
 

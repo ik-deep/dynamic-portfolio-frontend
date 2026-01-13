@@ -1,7 +1,12 @@
 import { Mail, MapPin, Send } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../context/Authcontext.jsx';
+import { defaultContactData } from '../utils/DefaultPortfolioData.js';
 
 const Contact = () => {
+  const { portfolioData } = useContext(AuthContext);
+  const data = portfolioData || defaultContactData;
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,18 +37,17 @@ const Contact = () => {
           <div className="w-20 h-1 bg-primary rounded-full mb-8 mx-auto" />
 
           <p className="text-muted-foreground text-lg mb-12">
-            I'm currently looking for new opportunities. Whether you have a question 
-            or just want to say hi, I'll try my best to get back to you!
+            {data.message}
           </p>
 
           <div className="flex justify-center gap-8 mb-12">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail className="w-5 h-5 text-primary" />
-              <span className="text-sm">er.irfan2798@gmail.com</span>
+              <span className="text-sm">{data.email}</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <MapPin className="w-5 h-5 text-primary" />
-              <span className="text-sm">Noida Sector-12, India</span>
+              <span className="text-sm">{data.address}</span>
             </div>
           </div>
 

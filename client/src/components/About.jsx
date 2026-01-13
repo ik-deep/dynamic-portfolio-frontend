@@ -1,6 +1,12 @@
 import profileImage from "../assets/darkprofileimg.png"
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../context/Authcontext.jsx';
+import { defaultAboutData } from '../utils/DefaultPortfolioData.js';
 
 const About = () => {
+  const { portfolioData } = useContext(AuthContext);
+  const data = portfolioData || defaultAboutData;
+
   return (
     <section id="about" className="py-24 bg-background">
       <div className="container mx-auto px-6">
@@ -15,20 +21,12 @@ const About = () => {
           <div className="grid md:grid-cols-5 gap-12 items-start">
             <div className="md:col-span-3 space-y-4 text-muted-foreground">
               <p>
-                Hello! I'm Irfan khan, a passionate web developer based in India.
-                Results-oriented Full Stack Developer with 2+ years of experience across Java, MERN, and Angular ecosystems, specializing in high-availability web applications.
-              </p>
-              <p>
-                Proven track record at Tekizma India Solutions of improving application stability by 15% through rigorous bug resolution and feature engineering.
-                Currently deep-specializing in MERN stack architectures and advanced Data Structures (1000+ problems solved) to build scalable, secure enterprise solutions.
-              </p>
-              <p>
-                Currently deep-specializing in MERN stack architectures and advanced Data Structures (1000+ problems solved) to build scalable, secure enterprise solutions.
+                {data.description}
               </p>
               <div className="pt-4">
                 <p className="text-foreground font-medium mb-3">Technologies I work with:</p>
                 <ul className="grid grid-cols-2 gap-2 font-mono text-sm">
-                  {['JavaScript (ES6+)', 'TailwindCSS', 'React', 'MongoDB', 'Express','Angular', 'Node.js', 'MySQL' ].map((tech) => (
+                  {data.technologiesWorkWith?.map((tech) => (
                     <li key={tech} className="flex items-center gap-2">
                       <span className="text-primary">▹</span>
                       {tech}
@@ -44,7 +42,7 @@ const About = () => {
                 <div className="relative bg-muted rounded-lg overflow-hidden border-2 border-primary/50">
                   <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                     {/* <div className="text-6xl">👨‍💻</div> */}
-                    <img src={profileImage} alt="irfankhan" />
+                    <img src={profileImage} alt="profileImg" />
                   </div>
                 </div>
               </div>
