@@ -31,12 +31,16 @@ const Projects = () => {
               >
                 <div className={`md:col-span-7 ${index % 2 === 1 ? 'md:col-start-6' : ''}`}>
                   <div className="relative aspect-video bg-muted rounded-lg overflow-hidden group">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors" />
+                    {project.image && (
+                      <>
+                        <img 
+                          src={project.image} 
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors" />
+                      </>
+                    )}
                   </div>
                 </div>
                 <div
@@ -74,11 +78,11 @@ const Projects = () => {
               <div
                 key={project.title}
                 className="relative bg-card rounded-lg border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-card hover:shadow-card-hover group overflow-hidden"
-                style={{
+                style={project.image ? {
                   backgroundImage: `url(${project.image})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
-                }}
+                } : {}}
               >
                 <div className="absolute inset-0 bg-card/90 group-hover:bg-card/80 transition-colors" />
                 <div className="relative p-6 z-10">

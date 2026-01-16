@@ -1,4 +1,10 @@
 export const dataFormating = (data) => {
+   const [first, second, third, ...others] = data.projects || [];
+   const projectsFormate = {
+     featured: [first, second, third].filter(Boolean), 
+     other: others
+   }
+
     const formattedData = {
       name: data.name,
       email: data.email,
@@ -11,7 +17,7 @@ export const dataFormating = (data) => {
       description: data.description,
       skills: data.skills,
       experiences: data.experiences,
-      projects: data.projects,
+      projects: projectsFormate,
       
     };
   

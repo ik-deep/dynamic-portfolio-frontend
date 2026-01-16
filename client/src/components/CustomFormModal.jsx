@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, Check, Plus, Trash2 } from 'lucide-react';
 import { AuthContext } from '../context/Authcontext.jsx';
-import { dataFormating} from '../utils/formatingDataForUpdate.js'
+import { dataFormating } from '../utils/formatingDataForUpdate.js'
 
 const CustomFormModal = ({ isOpen, onClose }) => {
   const { portfolioData, updatePortfolio } = useContext(AuthContext);
-console.log(portfolioData)
+  console.log(portfolioData)
   const [currentStep, setCurrentStep] = useState(0);
   const [contactData, setContactData] = useState({
     name: portfolioData?.name || 'John Doe',
@@ -36,54 +36,34 @@ console.log(portfolioData)
     title: 'Soft Skills',
     skills: ['Communication', 'Teamwork', 'Problem Solving', 'Adaptability', 'Leadership']
   }]);
-  const [projects, setProjects] = useState(
-    portfolioData?.projects?.length > 0 ? portfolioData.projects : [
-      {
-        id: 1,
-        title: 'E-commerce Platform',
-        description: 'A full-stack e-commerce application with user authentication, product management, and payment integration.',
-        technologies: 'React, Node.js, MongoDB, Stripe API',
-        repoLink: 'https://github.com/johndoe/ecommerce-app',
-        liveLink: 'https://ecommerce-demo.vercel.app'
-      }
-    ]
-  );
-  const [experiences, setExperiences] = useState(
-    portfolioData?.experiences?.length > 0 ? portfolioData.experiences : [
-      {
-        id: 1,
-        company: 'Tech Solutions Inc.',
-        position: 'Full Stack Developer',
-        duration: 'Jan 2022 - Present',
-        description: 'Developed and maintained web applications using React and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.'
-      }
-    ]
-  );
+  const [projects, setProjects] = useState([]);
+  const [experiences, setExperiences] = useState([]);
 
   // Update form data when portfolioData changes
   useEffect(() => {
     if (portfolioData) {
       setContactData({
-        name: portfolioData.name || 'John Doe',
+        name: portfolioData.name,
         email: portfolioData.email,
-        github: portfolioData.github || 'https://github.com/johndoe',
-        linkedin: portfolioData.linkedin || 'https://linkedin.com/in/johndoe',
-        address: portfolioData.address || 'New York, NY',
-        summary: portfolioData.summary || 'Passionate full-stack developer with 3+ years of experience building modern web applications.'
+        github: portfolioData.github,
+        linkedin: portfolioData.linkedin,
+        address: portfolioData.address,
+        summary: portfolioData.summary
       });
       setAboutData({
-        title: portfolioData.title || 'Full Stack Developer',
-        description: portfolioData.description || 'I am a dedicated software developer with expertise in modern web technologies.',
-        technologiesWorkWith: portfolioData.technologiesWorkWith || ['JavaScript (ES6+)', 'TailwindCSS', 'React', 'MongoDB', 'Express', 'Angular', 'Node.js', 'MySQL']
+        title: portfolioData.title,
+        description: portfolioData.description,
+        technologiesWorkWith: portfolioData.technologiesWorkWith
       });
       if (portfolioData.skills?.length > 0) {
         setSkillsData(portfolioData.skills);
       }
 
-      if (portfolioData.projects?.length > 0) {
-        setProjects(portfolioData.projects);
+      if (portfolioData.projects) {
+        console.log(...portfolioData.projects.featured, ...portfolioData.projects.other)
+        setProjects([...portfolioData.projects.featured, ...portfolioData.projects.other]);
       }
-      if (portfolioData.experiences?.length > 0) {
+      if (portfolioData.experience?.length > 0) {
         setExperiences(portfolioData.experiences);
       }
     }
@@ -94,9 +74,9 @@ console.log(portfolioData)
       id: Date.now(),
       title: '',
       description: '',
-      technologies: '',
-      repoLink: '',
-      liveLink: ''
+      tech: [],
+      github: '',
+      live: ''
     };
     setProjects([...projects, newProject]);
   };
@@ -150,9 +130,8 @@ console.log(portfolioData)
   const handleFinalSubmit = (e) => {
     e.preventDefault();
     // Logic to save all data at once
-    console.log("Final Data:", dataFormating({...contactData, ...aboutData, skills:skillsData, projects, experiences}));
-    
-    updatePortfolio( dataFormating({...contactData, ...aboutData, skills:skillsData, projects, experiences}))
+    console.log("Final Data:", dataFormating({ ...contactData, ...aboutData, skills: skillsData, projects, experiences }));
+    updatePortfolio(dataFormating({ ...contactData, ...aboutData, skills: skillsData, projects, experiences }))
     // toast.success('Portfolio updated successfully!');
     onClose();
   };
@@ -261,7 +240,9 @@ console.log(portfolioData)
                 <input
                   type="text"
                   value={aboutData.technologiesWorkWith}
-                  onChange={(e) => setAboutData({ ...aboutData, technologiesWorkWith: e.target.value })}
+                  onChange={(e) => {
+                    setAboutData({ ...aboutData, technologiesWorkWith: e.target.value.split(',')})
+                  }}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
                   placeholder="e.g. Full Stack Developer"
                 />
@@ -336,17 +317,17 @@ console.log(portfolioData)
                       <label className="text-sm font-medium mb-1 block text-gray-700 dark:text-gray-300">Live Link</label>
                       <input
                         type="url"
-                        value={project.liveLink}
-                        onChange={(e) => updateProject(project.id, 'liveLink', e.target.value)}
+                        value={project.live || ''}
+                        onChange={(e) => updateProject(project.id, 'live', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-1 block text-gray-700 dark:text-gray-300">Repo Link</label>
+                      <label className="text-sm font-medium mb-1 block text-gray-700 dark:text-gray-300">GitHub Link</label>
                       <input
                         type="url"
-                        value={project.repoLink}
-                        onChange={(e) => updateProject(project.id, 'repoLink', e.target.value)}
+                        value={project.github || ''}
+                        onChange={(e) => updateProject(project.id, 'github', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
                       />
                     </div>
@@ -357,13 +338,13 @@ console.log(portfolioData)
                     <label className="text-sm font-medium mb-1 block text-gray-700 dark:text-gray-300">Technologies</label>
                     <input
                       type="text"
-                      value={project.technologies}
-                      onChange={(e) => updateProject(project.id, 'technologies', e.target.value)}
+                      value={Array.isArray(project.tech) ? project.tech.join(', ') : (project.tech || '')}
+                      onChange={(e) => updateProject(project.id, 'tech', e.target.value.split(',').map(t => t.trim()).filter(t => t))}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
                       placeholder="React, Node.js, MongoDB..."
                     />
                   </div>
-
+                 
                   <div>
                     <label className="text-sm font-medium mb-1 block text-gray-700 dark:text-gray-300">Project Description</label>
                     <textarea

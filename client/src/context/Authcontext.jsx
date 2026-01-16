@@ -69,7 +69,8 @@ export const AuthContext = createContext();
         if (updatedData != null) console.log("Updating portfolio with:", updatedData)
         try {
             const response = await axios.put('/api/portfolio', updatedData);
-            setPortfolioData(response.data);
+            // setPortfolioData(response.data);
+            fetchPortfolio();
             toast.success("Portfolio updated successfully!");
         } catch (error) {
             console.error("Error updating portfolio:", error);
