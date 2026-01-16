@@ -3,7 +3,7 @@ import axios from 'axios'; // We'll use Axios for API calls
 import { toast } from 'react-toastify';
 
 // Configure axios base URL
-axios.defaults.baseURL = import.meta.env.BASE_URL || 'http://localhost:5000';
+axios.defaults.baseURL = "https://dynamic-portfolio-backend-je0f.onrender.com" || 'http://localhost:5050';
 
 // 1. Create the Context
 export const AuthContext = createContext();
