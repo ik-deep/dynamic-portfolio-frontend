@@ -3,7 +3,7 @@ import axios from 'axios'; // We'll use Axios for API calls
 import { toast } from 'react-toastify';
 
 // Configure axios base URL
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = import.meta.env.BASE_URL || 'http://localhost:5000';
 
 // 1. Create the Context
 export const AuthContext = createContext();
